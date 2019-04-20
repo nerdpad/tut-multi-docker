@@ -24,7 +24,7 @@
     {
       "name": "nginx",
       "image": "nerdpad/tut-multi-docker-nginx",
-      "essential": true,,
+      "essential": true,
       "memory": 128,
       "portMappings": [{
         "hostPort": 80,
