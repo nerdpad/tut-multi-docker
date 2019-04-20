@@ -1,0 +1,22 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -f ./client/Dockerfile.dev -t nerdpad/tut-multi-docker ./client
+
+script:
+  - docker run nerdpad/tut-multi-docker npm run test -- --coverage
+
+after_success:
+  - docker build -t nerdpad/tut-multi-docker-client ./client
+  - docker build -t nerdpad/tut-multi-docker-nginx ./nginx
+  - docker build -t nerdpad/tut-multi-docker-server ./server
+  - docker build -t nerdpad/tut-multi-docker-worker ./worker
+  # Log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # push the images to docker hub
+  - docker push nerdpad/tut-multi-docker-client
+  - docker push nerdpad/tut-multi-docker-nginx
+  - docker push nerdpad/tut-multi-docker-server
+  - docker push nerdpad/tut-multi-docker-worker
