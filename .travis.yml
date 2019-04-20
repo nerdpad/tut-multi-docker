@@ -27,7 +27,7 @@ deploy:
   app: "tut-multi-docker"
   env: "MultiDocker-env"
   bucket_name: "elasticbeanstalk-us-east-2-045913666253"
-  bucket_path: ""tut-multi-docker""
+  bucket_path: "tut-multi-docker"
   on:
     branch: master
   access_key_id: $AWS_ACCESS_KEY
